@@ -1,2 +1,2 @@
 # REST API
-[REST Architecture.png]
+![Alt text](REST Architecture.png?raw=true "REST API")
