@@ -1,6 +1,0 @@
-# Front End
-
-
-# Tecnology
-
-
