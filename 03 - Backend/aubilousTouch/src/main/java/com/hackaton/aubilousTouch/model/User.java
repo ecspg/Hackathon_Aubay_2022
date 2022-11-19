@@ -1,29 +1,39 @@
 package com.hackaton.aubilousTouch.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class User {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_user;
 
+    @Column(name = "ds_login")
     private String login;
 
+    @Column(name = "ds_name")
     private String name;
 
+    @Column(name = "ds_email")
     private String email;
 
+    @Column(name = "dt_created")
     private LocalDate creationDate;
 
+    @Column(name = "ds_deleted")
     private LocalDate deletionDate;
 
+    @Column(name = "hs_password")
     private String password;
 
-    public Integer getId() {
-        return id;
+    public Integer getId_user() {
+        return id_user;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_user(Integer id) {
+        this.id_user = id;
     }
 
     public String getLogin() {
