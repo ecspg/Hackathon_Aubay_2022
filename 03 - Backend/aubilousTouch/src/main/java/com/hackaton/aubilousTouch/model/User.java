@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table (name = "tblUser", schema = "dbo")
 public class User {
 
     @Id
@@ -22,11 +23,14 @@ public class User {
     @Column(name = "dt_created")
     private LocalDate creationDate;
 
-    @Column(name = "ds_deleted")
+    @Column(name = "dt_deleted")
     private LocalDate deletionDate;
 
     @Column(name = "hs_password")
     private String password;
+
+    public User() {
+    }
 
     public Integer getId_user() {
         return id_user;
