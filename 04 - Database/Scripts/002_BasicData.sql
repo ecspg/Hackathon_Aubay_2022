@@ -13,3 +13,20 @@ INSERT INTO [dbo].[tblCampaign_Status] ([ds_name]) VALUES ('Scheduled');
 INSERT INTO [dbo].[tblCampaign_Status] ([ds_name]) VALUES ('Running');
 INSERT INTO [dbo].[tblCampaign_Status] ([ds_name]) VALUES ('Completed');
 INSERT INTO [dbo].[tblCampaign_Status] ([ds_name]) VALUES ('Canceled');
+
+--- tblUser
+INSERT INTO [dbo].[tblUser]
+  ([ds_login]
+      ,[ds_name]
+      ,[ds_email]
+      ,[hs_password]
+      ,[dt_created])
+    VALUES 
+    (
+        'administrator'
+        ,'Administrator'
+        ,'administrator@administrator.com'
+        ,HASHBYTES('SHA2_512','@Admin123456$%')
+        ,GETDATE()
+
+    );
