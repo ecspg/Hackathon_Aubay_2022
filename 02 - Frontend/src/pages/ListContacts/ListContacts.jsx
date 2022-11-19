@@ -1,19 +1,14 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable import/no-unresolved */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Classes, HotkeysProvider, Icon, InputGroup, Intent } from '@blueprintjs/core';
 import { Cell, Column, ColumnHeaderCell2, Table2 } from "@blueprintjs/table";
-import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line import/extensions
-import { GlobalContext } from '@/GlobalContext';
-import ContactService from '../../services/ContactService';
+import ContactService from '@services/ContactService';
 
 import * as S from './styles';
 
 function ListContacts() {
-  const global = useContext(GlobalContext);
-  const navigate = useNavigate();
   const [contacts, setContacts] = useState();
   const [filterValue, setFilterValue] = useState();
 
@@ -22,11 +17,6 @@ function ListContacts() {
       setContacts(data);
     });
   }, []);
-
-  function onLogout() {
-    global.setUserInfo(null);
-    navigate('/');
-  }
 
   function renderName(name) {
     return (
@@ -63,8 +53,6 @@ function ListContacts() {
 
   return (
     <S.Container>
-      <Button onClick={() => onLogout()}>Logout</Button>
-
       <h1>Contacts</h1>
       <S.FilterButtonWrapper>
         <S.ButtonWrapper>
