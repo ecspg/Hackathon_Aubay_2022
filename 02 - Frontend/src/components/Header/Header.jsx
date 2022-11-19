@@ -16,6 +16,10 @@ function Header() {
     setIsLoginPage(window.location.pathname === '/login');
   }, [])
 
+  function handleNavClick(navUrl) {
+    window.location = navUrl;
+  }
+
   function handleLogout() {
     global.setUserInfo(null);
     window.location = '/';
@@ -29,10 +33,10 @@ function Header() {
             <S.Logo src={logo} alt="Aubay's logo" />
           </NavbarHeading>
           <NavbarDivider />
-          <Button className={Classes.MINIMAL} icon="person" text="Contacts" />
-          <Button className={Classes.MINIMAL} icon="comment" text="Campaigns" />
-          <Button className={Classes.MINIMAL} icon="chat" text="Channels" />
-          <Button className={Classes.MINIMAL} icon="chart" text="Reports" />
+          <Button className={Classes.MINIMAL} icon="person" text="Contacts" onClick={() => handleNavClick('/contacts')} />
+          <Button className={Classes.MINIMAL} icon="comment" text="Campaigns" onClick={() => handleNavClick('/campaigns')} />
+          <Button className={Classes.MINIMAL} icon="chat" text="Channels" onClick={() => handleNavClick('/channels')} />
+          <Button className={Classes.MINIMAL} icon="chart" text="Reports" onClick={() => handleNavClick('/reports')} />
         </NavbarGroup>
         <Button className={Classes.MINIMAL} onClick={() => handleLogout()} icon="log-out" text="Logout" />
       </S.Container>

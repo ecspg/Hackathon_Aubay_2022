@@ -4,6 +4,7 @@ import { Navigate, Routes, Route, BrowserRouter as Router } from 'react-router-d
 
 import Login from '@pages/Login';
 import ListContacts from '@pages/ListContacts/ListContacts';
+import Contact from '@pages/Contact';
 // eslint-disable-next-line import/extensions
 import { GlobalContext } from '@/GlobalContext';
 
@@ -21,6 +22,7 @@ function AppRoutes() {
         } />
         <Route path="/login" element={<Login />} />
         <Route path="/contacts" element={<ListContacts />} />
+        <Route path="/contacts/new" element={<Contact />} />
       </Routes>
     </Router>
   );

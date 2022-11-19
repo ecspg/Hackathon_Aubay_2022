@@ -13,6 +13,13 @@ const ContactService = {
     });
     /* return axios.get('http://bit.ly/2mTM3nY'); */
   },
+  addContact(contactInfo) {
+    // TODO: Post to back-end contacts
+    return new Promise((resolve) => {
+      resolve(contactInfo);
+    });
+    /* return axios.post('http://bit.ly/2mTM3nY', contactInfo); */
+  },
 };
 
 export default ContactService;
