@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useState } from 'react';
 import { Button, Elevation, FormGroup, InputGroup, Intent } from '@blueprintjs/core';
+import { useNavigate } from "react-router-dom";
 
 import LoginService from '@services/LoginService';
 import logo from '@assets/logo.png';
@@ -11,6 +12,7 @@ import * as S from './styles';
 
 function Login() {
   const global = useContext(GlobalContext);
+  const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({login: '', password: ''});
 
   function handleOnChange({ id, value }) {
@@ -26,6 +28,7 @@ function Login() {
     e.preventDefault();
     LoginService.authenticate(loginInfo).then(res => {
       global.setUserInfo(res);
+      navigate("/contacts");
     });
   }
 
