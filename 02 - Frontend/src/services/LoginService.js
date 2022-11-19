@@ -6,11 +6,7 @@ const LoginService = {
     return new Promise((resolve) => {
       resolve(loginInfo);
     });
-    /* return axios({
-      method: 'post',
-      url: 'http://bit.ly/2mTM3nY',
-      data: loginInfo,
-    }); */
+    // return axios.post('http://bit.ly/2mTM3nY', loginInfo);
   },
 };
 
