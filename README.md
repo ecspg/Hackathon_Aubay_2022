@@ -9,9 +9,8 @@ The theme/objective of the Hackathon is to develop the "Aubilous Touch" app, a n
 - Thiago Noronha Caldas
 
 # Solution
-The solution defined by the team is a web restful application
-![Restful App](https://github.com/ecspg/Hackathon_Aubay_2022/blob/main/01%20-%20Documentation/REST%20Architecture.png)
-and a message application to send all necessary messages to the correspondent channels.
+The solution defined by the team is a web restful application and a message application to send all necessary messages to the correspondent channels.
+![Restful App](https://github.com/ecspg/Hackathon_Aubay_2022/blob/main/01%20-%20Documentation/img/Architecture.png)
 
 Frontend is developed on REACT
 Backend is developed on Java
