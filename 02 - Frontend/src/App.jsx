@@ -2,11 +2,15 @@ import React from 'react';
 import './App.css';
 import AppRoutes from "./routes";
 
+import { GlobalStorage } from './GlobalContext';
+
 function App() {
   return (
-    <div className="App">
-      <AppRoutes />
-    </div>
+    <GlobalStorage>
+      <div className="App">
+        <AppRoutes />
+      </div>
+    </GlobalStorage>
   );
 }
 
