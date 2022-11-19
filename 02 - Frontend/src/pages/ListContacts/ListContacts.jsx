@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { Button, Classes, HotkeysProvider, Icon, InputGroup, Intent } from '@blueprintjs/core';
 import { Cell, Column, ColumnHeaderCell2, Table2 } from "@blueprintjs/table";
 
@@ -11,6 +12,7 @@ import * as S from './styles';
 function ListContacts() {
   const [contacts, setContacts] = useState();
   const [filterValue, setFilterValue] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     ContactService.getContacts().then(data => {
@@ -51,12 +53,16 @@ function ListContacts() {
     setFilterValue(e.target.value);
   }
 
+  function handleAddClick() {
+    navigate("/contacts/new");
+  }
+
   return (
     <S.Container>
       <h1>Contacts</h1>
       <S.FilterButtonWrapper>
         <S.ButtonWrapper>
-          <Button intent={Intent.SUCCESS}>
+          <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
             Add Contact
           </Button>
           <Button intent={Intent.SUCCESS}>
