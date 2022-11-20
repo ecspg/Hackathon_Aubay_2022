@@ -27,3 +27,32 @@ FROM dbo.user_mock;
 -- Housekeeping
 DROP TABLE dbo.user_mock;
 DROP TABLE dbo.mock_datatblCampaign_1;
+
+-- Mais do mesmo, User Logs agora
+
+INSERT INTO [dbo].[tblUser_Log](
+	id_user,
+	ds_message,
+	dt_log ) 
+SELECT * FROM dbo.user_log_mock;
+
+DROP TABLE dbo.user_log_mock;
+
+INSERT INTO [dbo].[tblContact](
+	ds_first_name,
+	ds_middle_name,
+	ds_surname,
+	ds_internal_identification,
+	dt_created,
+	id_user_created)
+    SELECT 
+    	ds_first_name,
+        ds_middle_name,
+        ds_surname,
+        ds_internal_identification,
+        dt_created,
+        id_user_created
+    FROM
+    dbo.mock_contact
+	
+DROP TABLE dbo.mock_contact;
