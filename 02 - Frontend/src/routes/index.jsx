@@ -4,8 +4,9 @@ import { Navigate, Routes, Route, BrowserRouter as Router } from 'react-router-d
 
 import Login from '@pages/Login';
 import ListContacts from '@pages/ListContacts';
-import ListCampaigns from '@pages/ListCampaigns';
 import Contact from '@pages/Contact';
+import ListCampaigns from '@pages/ListCampaigns';
+import Campaign from '@pages/Campaign';
 import ListChannels from '@pages/ListChannels';
 // eslint-disable-next-line import/extensions
 import { GlobalContext } from '@/GlobalContext';
@@ -26,6 +27,7 @@ function AppRoutes() {
         <Route path="/contacts" element={<ListContacts />} />
         <Route path="/contacts/new" element={<Contact />} />
         <Route path="/campaigns" element={<ListCampaigns />} />
+        <Route path="/campaigns/new" element={<Campaign />} />
         <Route path="/channels" element={<ListChannels />} />
       </Routes>
     </Router>
