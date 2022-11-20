@@ -5,6 +5,7 @@ import { Button, FormGroup, InputGroup, Intent, MenuItem, TextArea } from '@blue
 import { MultiSelect2 } from "@blueprintjs/select";
 
 import CampaignService from '@services/CampaignService';
+import TransferList from '@components/TransferList';
 
 import * as S from './styles';
 
@@ -170,6 +171,7 @@ function Campaign() {
               />
             </FormGroup>
           </S.FormWrapper>
+          <TransferList />
           <S.ButtonWrapper>
             <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
           </S.ButtonWrapper>
