@@ -1,10 +1,11 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, FormGroup, InputGroup, Intent, MenuItem, TextArea } from '@blueprintjs/core';
 import { MultiSelect2 } from "@blueprintjs/select";
 
 import CampaignService from '@services/CampaignService';
+import ContactService from '@services/ContactService';
 import TransferList from '@components/TransferList';
 
 import * as S from './styles';
@@ -12,6 +13,7 @@ import * as S from './styles';
 function Campaign() {
   const navigate = useNavigate();
   const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: '', scheduledBegin: null, scheduledEnd: null });
+  const [contacts, setContacts] = useState(null);
   const [selectedChannels, setSelectedChannels] = useState([
     { type: "Email", id: 1 },
   ]);
@@ -21,6 +23,12 @@ function Campaign() {
     { type: "Telegram", id: 2 },
     { type: "WhatsApp", id: 3 },
   ];
+
+  useEffect(() => {
+    ContactService.getContacts().then(data => {
+      setContacts(data);
+    });
+  }, []);
 
   function handleOnChange({ id, value }) {
     const info = {};
@@ -171,7 +179,7 @@ function Campaign() {
               />
             </FormGroup>
           </S.FormWrapper>
-          <TransferList />
+          <TransferList data={contacts} />
           <S.ButtonWrapper>
             <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
           </S.ButtonWrapper>
