@@ -5,11 +5,13 @@ const mock = [
     type: 'WhatsApp',
     hostname: '',
     key: '',
+    secret: '',
   },
   {
     type: 'Telegram',
     hostname: '',
     key: '',
+    secret: '',
   },
 ];
 

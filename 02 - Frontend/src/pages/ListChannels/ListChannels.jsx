@@ -17,6 +17,7 @@ function ListChannels() {
     { prop: 'type', header: 'Channel name' },
     { prop: 'hostname', header: 'Hostname' },
     { prop: 'key', header: 'Key' },
+    { prop: 'secret', header: 'Secret' },
   ]
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function ListChannels() {
             Add Channel
           </Button>
           <Button intent={Intent.SUCCESS}>
-            <Icon icon="table" /> Add via CSV
+            <Icon icon="table" /> Import CSV
           </Button>
         </S.ButtonWrapper>
         <InputGroup

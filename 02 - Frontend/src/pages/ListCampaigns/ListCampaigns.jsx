@@ -17,6 +17,8 @@ function ListCampaigns() {
     { prop: 'name', header: 'Name' },
     { prop: 'title', header: 'Title' },
     { prop: 'description', header: 'Description' },
+    { prop: 'scheduledBegin', header: 'Scheduled begin' },
+    { prop: 'scheduledEnd', header: 'Scheduled end' },
     { prop: 'status', header: 'Status' },
   ]
 
@@ -43,7 +45,7 @@ function ListCampaigns() {
             Add Campaign
           </Button>
           <Button intent={Intent.SUCCESS}>
-            <Icon icon="table" /> Add via CSV
+            <Icon icon="table" /> Import CSV
           </Button>
         </S.ButtonWrapper>
         <InputGroup

@@ -10,7 +10,7 @@ import * as S from './styles';
 
 function Campaign() {
   const navigate = useNavigate();
-  const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: ''});
+  const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: '', scheduledBegin: null, scheduledEnd: null });
   /* const [selectedFilm, setSelectedFilm] = useState({ title: "The Godfather", year: 1972 });
   const TOP_100_FILMS = [
     { title: "The Shawshank Redemption", year: 1994 },
@@ -46,7 +46,14 @@ function Campaign() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    CampaignService.addCampaign(campaignInfo).then(() => {
+
+    const newCampaign = {};
+
+    Object.assign(newCampaign, campaignInfo);
+    newCampaign.scheduledBegin = new Date(newCampaign.scheduledBegin);
+    newCampaign.scheduledEnd = new Date(newCampaign.scheduledEnd);
+
+    CampaignService.addCampaign(newCampaign).then(() => {
       navigate("/campaigns");
     });
   }
@@ -86,6 +93,24 @@ function Campaign() {
                 intent={Intent.PRIMARY}
                 onChange={e=>handleOnChange(e.target)}
                 value={campaignInfo.description}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Scheduled Begin (yyyy-MM-dd)"
+              labelFor="scheduledBegin"
+            >
+              <InputGroup
+                id="scheduledBegin"
+                onChange={e=>handleOnChange(e.target)}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Scheduled End (yyyy-MM-dd)"
+              labelFor="scheduledEnd"
+            >
+              <InputGroup
+                id="scheduledEnd"
+                onChange={e=>handleOnChange(e.target)}
               />
             </FormGroup>
             {/* <FormGroup

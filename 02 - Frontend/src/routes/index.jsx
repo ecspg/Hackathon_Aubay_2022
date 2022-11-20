@@ -8,6 +8,7 @@ import Contact from '@pages/Contact';
 import ListCampaigns from '@pages/ListCampaigns';
 import Campaign from '@pages/Campaign';
 import ListChannels from '@pages/ListChannels';
+import Channel from '@pages/Channel';
 // eslint-disable-next-line import/extensions
 import { GlobalContext } from '@/GlobalContext';
 
@@ -29,6 +30,7 @@ function AppRoutes() {
         <Route path="/campaigns" element={<ListCampaigns />} />
         <Route path="/campaigns/new" element={<Campaign />} />
         <Route path="/channels" element={<ListChannels />} />
+        <Route path="/channels/new" element={<Channel />} />
       </Routes>
     </Router>
   );
