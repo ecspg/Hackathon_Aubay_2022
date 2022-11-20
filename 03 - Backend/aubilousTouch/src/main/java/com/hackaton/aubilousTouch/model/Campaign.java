@@ -1,38 +1,54 @@
 package com.hackaton.aubilousTouch.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table (name = "tblCampaign", schema = "dbo")
 public class Campaign {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_campaign;
 
+    @Column(name = "ds_name")
     private String name;
 
-
+    @Column(name = "ds_title")
     private String tittle;
 
-    private CampainStatus campainStatus;
+    @Column(name = "id_campaign_status")
+    @Enumerated(EnumType.ORDINAL)
+    private CampaignStatus campaignStatus;
 
-    private User userCreated;
+//    @ManyToOne
+//    private User userCreated;
+//
+//    @ManyToOne
+//    private User userDeleted;
 
-    private User userDeleted;
-
+    @Column(name = "ds_description")
     private String description;
 
+    @Column(name = "dt_scheduled_begin")
     private LocalDateTime scheduledBegin;
 
+    @Column(name = "dt_scheduled_end")
     private LocalDateTime scheduledEnd;
 
+    @Column(name = "dt_created")
     private LocalDateTime dateCreated;
 
+    @Column(name = "dt_deleted")
     private LocalDateTime dateDeleted;
 
-    public Integer getId() {
-        return id;
+
+    public Integer getId_campaign() {
+        return id_campaign;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_campaign(Integer id_campaign) {
+        this.id_campaign = id_campaign;
     }
 
     public String getName() {
@@ -51,29 +67,29 @@ public class Campaign {
         this.tittle = tittle;
     }
 
-    public CampainStatus getCampainStatus() {
-        return campainStatus;
+    public CampaignStatus getCampainStatus() {
+        return campaignStatus;
     }
 
-    public void setCampainStatus(CampainStatus campainStatus) {
-        this.campainStatus = campainStatus;
+    public void setCampainStatus(CampaignStatus campaignStatus) {
+        this.campaignStatus = campaignStatus;
     }
 
-    public User getUserCreated() {
-        return userCreated;
-    }
-
-    public void setUserCreated(User userCreated) {
-        this.userCreated = userCreated;
-    }
-
-    public User getUserDeleted() {
-        return userDeleted;
-    }
-
-    public void setUserDeleted(User userDeleted) {
-        this.userDeleted = userDeleted;
-    }
+//    public User getUserCreated() {
+//        return userCreated;
+//    }
+//
+//    public void setUserCreated(User userCreated) {
+//        this.userCreated = userCreated;
+//    }
+//
+//    public User getUserDeleted() {
+//        return userDeleted;
+//    }
+//
+//    public void setUserDeleted(User userDeleted) {
+//        this.userDeleted = userDeleted;
+//    }
 
     public String getDescription() {
         return description;

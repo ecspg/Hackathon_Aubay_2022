@@ -1,29 +1,41 @@
 package com.hackaton.aubilousTouch.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "tblChannel_Setting", schema = "dbo")
 public class ChannelSetting {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_channel_setting;
 
+    @Column(name = "ds_hostname")
     private String hostname;
 
+    @Column(name = "id_channel_type")
+    @Enumerated(EnumType.ORDINAL)
     private ChannelType channelType;
 
+    @Column(name = "ds_key")
     private String key;
 
+    @Column(name = "ds_secret")
     private String secret;
 
+    @Column(name = "dt_created")
     private LocalDateTime dateCreated;
 
+    @Column(name = "dt_deleted")
     private LocalDateTime dateDeleted;
 
-    public Integer getId() {
-        return id;
+    public Integer getId_channel_setting() {
+        return id_channel_setting;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_channel_setting(Integer id_channel_setting) {
+        this.id_channel_setting = id_channel_setting;
     }
 
     public String getHostname() {
