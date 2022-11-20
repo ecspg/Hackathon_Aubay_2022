@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, FormGroup, InputGroup, Intent, MenuItem, TextArea } from '@blueprintjs/core';
@@ -14,6 +15,7 @@ function Campaign() {
   const navigate = useNavigate();
   const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: '', scheduledBegin: null, scheduledEnd: null });
   const [contacts, setContacts] = useState(null);
+  const [selectedContacts, setSelectedContacts] = useState(null);
   const [selectedChannels, setSelectedChannels] = useState([
     { type: "Email", id: 1 },
   ]);
@@ -78,6 +80,10 @@ function Campaign() {
     }
   }
 
+  function onTransfer(transferedItems) {
+    setSelectedContacts(transferedItems);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -86,7 +92,8 @@ function Campaign() {
     Object.assign(newCampaign, campaignInfo);
     newCampaign.scheduledBegin = new Date(newCampaign.scheduledBegin);
     newCampaign.scheduledEnd = new Date(newCampaign.scheduledEnd);
-    newCampaign.channelType = selectedChannels;
+    newCampaign.channelIds = selectedChannels.map(selectedChannel => selectedChannel.id);
+    newCampaign.contactIds = selectedContacts;
 
     CampaignService.addCampaign(newCampaign).then(() => {
       navigate("/campaigns");
@@ -179,7 +186,7 @@ function Campaign() {
               />
             </FormGroup>
           </S.FormWrapper>
-          <TransferList data={contacts} />
+          <TransferList data={contacts} onTransfer={onTransfer} />
           <S.ButtonWrapper>
             <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
           </S.ButtonWrapper>
