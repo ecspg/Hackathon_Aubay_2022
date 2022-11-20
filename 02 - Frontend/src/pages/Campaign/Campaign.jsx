@@ -1,39 +1,36 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Button, FormGroup, InputGroup, Intent, TextArea } from '@blueprintjs/core';
-// import { Select2 } from "@blueprintjs/select";
+import { Button, FormGroup, InputGroup, Intent, MenuItem, TextArea } from '@blueprintjs/core';
+import { MultiSelect2 } from "@blueprintjs/select";
 
 import CampaignService from '@services/CampaignService';
+import ContactService from '@services/ContactService';
+import TransferList from '@components/TransferList';
 
 import * as S from './styles';
 
 function Campaign() {
   const navigate = useNavigate();
   const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: '', scheduledBegin: null, scheduledEnd: null });
-  /* const [selectedFilm, setSelectedFilm] = useState({ title: "The Godfather", year: 1972 });
-  const TOP_100_FILMS = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
+  const [contacts, setContacts] = useState(null);
+  const [selectedContacts, setSelectedContacts] = useState(null);
+  const [selectedChannels, setSelectedChannels] = useState([
+    { type: "Email", id: 1 },
+  ]);
+  const popoverRef = React.createRef();
+  const channels = [
+    { type: "Email", id: 1 },
+    { type: "Telegram", id: 2 },
+    { type: "WhatsApp", id: 3 },
   ];
 
-  function renderFilm(film, { handleClick, handleFocus, modifiers }) {
-    if (!modifiers.matchesPredicate) {
-      return null;
-    }
-    return (
-      <MenuItem
-        active={modifiers.active}
-        disabled={modifiers.disabled}
-        key={film.title}
-        label={film.year.toString()}
-        onClick={handleClick}
-        onFocus={handleFocus}
-        roleStructure="listoption"
-        text={`${film.title}`}
-      />
-    );
-  }; */
+  useEffect(() => {
+    ContactService.getContacts().then(data => {
+      setContacts(data);
+    });
+  }, []);
 
   function handleOnChange({ id, value }) {
     const info = {};
@@ -44,6 +41,49 @@ function Campaign() {
     setCampaignInfo(info);
   }
 
+  function handleTagRemove(removedItemText) {
+    setSelectedChannels(selectedChannels.filter(selChannel => selChannel.type !== removedItemText));
+  }
+
+  function renderChannels(channel, { handleClick, handleFocus, modifiers }) {
+    if (!modifiers.matchesPredicate) {
+      return null;
+    }
+
+    return (
+      <MenuItem
+        active={modifiers.active}
+        disabled={modifiers.disabled}
+        key={channel.type}
+        onClick={handleClick}
+        onFocus={handleFocus}
+        roleStructure="listoption"
+        text={channel.type}
+
+        selected={channels.indexOf(channel) !== -1}
+        shouldDismissPopover={false}
+      />
+    );
+  };
+
+  function setSelectedChannel(newSelectedItem) {
+    let isOnList = false;
+
+    selectedChannels.forEach(selChannel => {
+      if (selChannel.id === newSelectedItem.id) {
+        isOnList = true;
+      }
+    });
+
+    if (!isOnList) {
+      setSelectedChannels([...selectedChannels, newSelectedItem]);
+    }
+  }
+
+  function onTransfer(transferedItems) {
+    setSelectedContacts(transferedItems);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -52,6 +92,8 @@ function Campaign() {
     Object.assign(newCampaign, campaignInfo);
     newCampaign.scheduledBegin = new Date(newCampaign.scheduledBegin);
     newCampaign.scheduledEnd = new Date(newCampaign.scheduledEnd);
+    newCampaign.channelIds = selectedChannels.map(selectedChannel => selectedChannel.id);
+    newCampaign.contactIds = selectedContacts;
 
     CampaignService.addCampaign(newCampaign).then(() => {
       navigate("/campaigns");
@@ -121,17 +163,30 @@ function Campaign() {
                 id="status"
                 onChange={e=>handleOnChange(e.target)}
               />
-            </FormGroup>
-            <Select2
-              items={TOP_100_FILMS}
-              // eslint-disable-next-line react/jsx-no-bind
-              itemRenderer={renderFilm}
-              noResults={<MenuItem disabled text="No results." roleStructure="listoption" />}
-              onItemSelect={setSelectedFilm}
+            </FormGroup> */}
+            <FormGroup
+              label="Channels"
+              labelFor="channels"
             >
-              <Button text={selectedFilm?.title} rightIcon="double-caret-vertical" placeholder="Select a film" />
-            </Select2> */}
+              <MultiSelect2
+                // eslint-disable-next-line react/jsx-no-bind
+                itemRenderer={renderChannels}
+                items={channels}
+                menuProps={{ "aria-label": "channels" }}
+                noResults={<MenuItem disabled text="No results." roleStructure="listoption" />}
+                onItemSelect={(e) => setSelectedChannel(e)}
+                popoverProps={{ matchTargetWidth: true, minimal: true }}
+                popoverRef={popoverRef}
+                tagRenderer={(channel) => channel.type}
+                tagInputProps={{
+                  onRemove: handleTagRemove,
+                  tagProps: { minimal: true },
+                }}
+                selectedItems={selectedChannels}
+              />
+            </FormGroup>
           </S.FormWrapper>
+          <TransferList data={contacts} onTransfer={onTransfer} />
           <S.ButtonWrapper>
             <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
           </S.ButtonWrapper>
