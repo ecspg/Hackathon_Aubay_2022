@@ -1,7 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { Button, FormGroup, InputGroup, Intent, TextArea } from '@blueprintjs/core';
 import { useNavigate } from "react-router-dom";
+import { Button, FormGroup, InputGroup, Intent, TextArea } from '@blueprintjs/core';
+// import { Select2 } from "@blueprintjs/select";
 
 import CampaignService from '@services/CampaignService';
 
@@ -10,6 +11,29 @@ import * as S from './styles';
 function Campaign() {
   const navigate = useNavigate();
   const [campaignInfo, setCampaignInfo] = useState({name: '', title: '', description: '', status: ''});
+  /* const [selectedFilm, setSelectedFilm] = useState({ title: "The Godfather", year: 1972 });
+  const TOP_100_FILMS = [
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+  ];
+
+  function renderFilm(film, { handleClick, handleFocus, modifiers }) {
+    if (!modifiers.matchesPredicate) {
+      return null;
+    }
+    return (
+      <MenuItem
+        active={modifiers.active}
+        disabled={modifiers.disabled}
+        key={film.title}
+        label={film.year.toString()}
+        onClick={handleClick}
+        onFocus={handleFocus}
+        roleStructure="listoption"
+        text={`${film.title}`}
+      />
+    );
+  }; */
 
   function handleOnChange({ id, value }) {
     const info = {};
@@ -64,7 +88,7 @@ function Campaign() {
                 value={campaignInfo.description}
               />
             </FormGroup>
-            <FormGroup
+            {/* <FormGroup
               label="Status"
               labelFor="status"
             >
@@ -73,6 +97,15 @@ function Campaign() {
                 onChange={e=>handleOnChange(e.target)}
               />
             </FormGroup>
+            <Select2
+              items={TOP_100_FILMS}
+              // eslint-disable-next-line react/jsx-no-bind
+              itemRenderer={renderFilm}
+              noResults={<MenuItem disabled text="No results." roleStructure="listoption" />}
+              onItemSelect={setSelectedFilm}
+            >
+              <Button text={selectedFilm?.title} rightIcon="double-caret-vertical" placeholder="Select a film" />
+            </Select2> */}
           </S.FormWrapper>
           <S.ButtonWrapper>
             <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
