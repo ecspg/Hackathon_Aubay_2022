@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Icon, InputGroup, Intent } from '@blueprintjs/core';
 
 import CampaignService from '@services/CampaignService';
-import List from '@components/List/List';
+import List from '@components/List';
 
 import * as S from './styles';
 

@@ -3,9 +3,10 @@ import React, { useContext } from 'react';
 import { Navigate, Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import Login from '@pages/Login';
-import ListContacts from '@pages/ListContacts/ListContacts';
-import ListCampaigns from '@pages/ListCampaigns/ListCampaigns';
+import ListContacts from '@pages/ListContacts';
+import ListCampaigns from '@pages/ListCampaigns';
 import Contact from '@pages/Contact';
+import ListChannels from '@pages/ListChannels';
 // eslint-disable-next-line import/extensions
 import { GlobalContext } from '@/GlobalContext';
 
@@ -25,6 +26,7 @@ function AppRoutes() {
         <Route path="/contacts" element={<ListContacts />} />
         <Route path="/contacts/new" element={<Contact />} />
         <Route path="/campaigns" element={<ListCampaigns />} />
+        <Route path="/channels" element={<ListChannels />} />
       </Routes>
     </Router>
   );
