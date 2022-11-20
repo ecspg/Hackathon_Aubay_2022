@@ -44,7 +44,6 @@ function Login() {
             >
               <InputGroup
                 id="login"
-                placeholder="Use your Aubay ID"
                 onChange={e=>handleOnChange(e.target)}
               />
             </FormGroup>
@@ -55,7 +54,6 @@ function Login() {
               <InputGroup
                 id="password"
                 type="password"
-                placeholder="Password"
                 onChange={e=>handleOnChange(e.target)}
               />
             </FormGroup>

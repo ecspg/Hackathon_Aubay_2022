@@ -43,7 +43,7 @@ function ListContacts() {
             Add Contact
           </Button>
           <Button intent={Intent.SUCCESS}>
-            <Icon icon="table" /> Add via CSV
+            <Icon icon="table" /> Import CSV
           </Button>
         </S.ButtonWrapper>
         <InputGroup
