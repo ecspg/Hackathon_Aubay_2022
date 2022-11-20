@@ -7,6 +7,9 @@ import device from '@/constants/device-sizes';
 
 export const Container = styled.div`
   align-items: center;
+  background: #d3d8de no-repeat fixed center;
+  background-blend-mode: overlay;
+  background-size: cover;
   display: flex;
   justify-content: center;
   height: 100vh;
