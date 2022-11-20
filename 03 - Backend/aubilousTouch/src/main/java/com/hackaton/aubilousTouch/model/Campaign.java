@@ -2,6 +2,7 @@ package com.hackaton.aubilousTouch.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table (name = "tblCampaign", schema = "dbo")
@@ -41,6 +42,10 @@ public class Campaign {
 
     @Column(name = "dt_deleted")
     private LocalDateTime dateDeleted;
+
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<CampaignContact> campaignContacts;
 
 
     public Integer getId_campaign() {
