@@ -4,25 +4,25 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Button, Icon, InputGroup, Intent } from '@blueprintjs/core';
 
-import ContactService from '@services/ContactService';
+import CampaignService from '@services/CampaignService';
 import List from '@components/List/List';
 
 import * as S from './styles';
 
-function ListContacts() {
+function ListCampaigns() {
   const navigate = useNavigate();
-  const [contacts, setContacts] = useState();
+  const [campaign, setCampaign] = useState();
   const [filterValue, setFilterValue] = useState();
   const tableFields = [
-    { prop: 'firstName', header: 'First name' },
-    { prop: 'middleName', header: 'Middle name' },
-    { prop: 'surname', header: 'Surname' },
-    { prop: 'internalIdentification', header: 'Internal identification' },
+    { prop: 'name', header: 'Name' },
+    { prop: 'title', header: 'Title' },
+    { prop: 'description', header: 'Description' },
+    { prop: 'status', header: 'Status' },
   ]
 
   useEffect(() => {
-    ContactService.getContacts().then(data => {
-      setContacts(data);
+    CampaignService.getCampaigns().then(data => {
+      setCampaign(data);
     });
   }, []);
 
@@ -31,16 +31,16 @@ function ListContacts() {
   }
 
   function handleAddClick() {
-    navigate("/contacts/new");
+    navigate("/campaigns/new");
   }
 
   return (
     <S.Container>
-      <h1>Contacts</h1>
+      <h1>Campaigns</h1>
       <S.FilterButtonWrapper>
         <S.ButtonWrapper>
           <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
-            Add Contact
+            Add Campaign
           </Button>
           <Button intent={Intent.SUCCESS}>
             <Icon icon="table" /> Add via CSV
@@ -50,13 +50,13 @@ function ListContacts() {
           large
           leftIcon="filter"
           onChange={(e) => handleFilterChange(e)}
-          placeholder="Filter contacts..."
+          placeholder="Filter campaign..."
           value={filterValue}
         />
       </S.FilterButtonWrapper>
-      {contacts && <List tableInfo={contacts} tableFields={tableFields} />}
+      {campaign && <List tableInfo={campaign} tableFields={tableFields} />}
     </S.Container>
   )
 }
 
-export default ListContacts;
+export default ListCampaigns;
