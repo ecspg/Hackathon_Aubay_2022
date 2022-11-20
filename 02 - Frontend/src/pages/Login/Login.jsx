@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import LoginService from '@services/LoginService';
 import logo from '@assets/logo.png';
+import team from '@assets/team.jpg';
 // eslint-disable-next-line import/extensions
 import { GlobalContext } from '@/GlobalContext';
 
@@ -33,7 +34,7 @@ function Login() {
   }
 
   return (
-    <S.Container>
+    <S.Container style={{ backgroundImage: `url(${team})` }}>
       <S.LoginCard elevation={Elevation.THREE}>
         <S.Logo src={logo} alt="Aubay's logo" />
         <S.Form onSubmit={e => handleSubmit(e)}>

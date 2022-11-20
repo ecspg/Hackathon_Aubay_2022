@@ -9,7 +9,7 @@ import * as S from './styles';
 
 function Contact() {
   const navigate = useNavigate();
-  const [contactInfo, setContactInfo] = useState({firstName: '', middleName: '', surname: '', internalIdentification: ''});
+  const [contactInfo, setContactInfo] = useState({firstName: '', middleName: '', surname: '', internalIdentification: '', phone1: '', phone2: '', email1: '', email2: ''});
 
   function handleOnChange({ id, value }) {
     const info = {};
@@ -65,6 +65,42 @@ function Contact() {
             >
               <InputGroup
                 id="internalIdentification"
+                onChange={e=>handleOnChange(e.target)}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Phone 1"
+              labelFor="phone1"
+            >
+              <InputGroup
+                id="phone1"
+                onChange={e=>handleOnChange(e.target)}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Phone 2"
+              labelFor="phone2"
+            >
+              <InputGroup
+                id="phone2"
+                onChange={e=>handleOnChange(e.target)}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Email 1"
+              labelFor="email1"
+            >
+              <InputGroup
+                id="email1"
+                onChange={e=>handleOnChange(e.target)}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Email 2"
+              labelFor="email2"
+            >
+              <InputGroup
+                id="email2"
                 onChange={e=>handleOnChange(e.target)}
               />
             </FormGroup>

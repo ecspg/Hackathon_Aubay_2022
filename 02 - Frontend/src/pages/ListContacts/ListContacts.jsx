@@ -18,6 +18,8 @@ function ListContacts() {
     { prop: 'middleName', header: 'Middle name' },
     { prop: 'surname', header: 'Surname' },
     { prop: 'internalIdentification', header: 'Internal identification' },
+    { prop: 'phone1', header: 'Phone 1' },
+    { prop: 'email1', header: 'Email 1' },
   ]
 
   useEffect(() => {
