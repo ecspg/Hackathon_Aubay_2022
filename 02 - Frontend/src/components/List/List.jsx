@@ -14,8 +14,10 @@ function List({ tableInfo, tableFields }) {
       return null;
     }
 
-    if (screenSize > 1440) {
-      screenSize = 1400;
+    if (screenSize >= 1440) {
+      screenSize = 1360;
+    } else if (screenSize >= 768) {
+      screenSize -= 48;
     }
     
     screenSize /= tableFields.length;

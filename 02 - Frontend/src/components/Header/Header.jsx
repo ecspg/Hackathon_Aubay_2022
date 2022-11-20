@@ -11,9 +11,11 @@ import * as S from './styles';
 function Header() {
   const global = useContext(GlobalContext);
   const [isLoginPage, setIsLoginPage] = useState(true);
+  const [isTabletOrLarger, setIsTabletOrLarger] = useState(false);
 
   useEffect(() => {
     setIsLoginPage(window.location.pathname === '/login');
+    setIsTabletOrLarger(window.screen.width >= 768);
   }, [])
 
   function handleNavClick(navUrl) {
@@ -33,10 +35,10 @@ function Header() {
             <S.Logo src={logo} alt="Aubay's logo" />
           </NavbarHeading>
           <NavbarDivider />
-          <Button className={Classes.MINIMAL} icon="person" text="Contacts" onClick={() => handleNavClick('/contacts')} />
-          <Button className={Classes.MINIMAL} icon="comment" text="Campaigns" onClick={() => handleNavClick('/campaigns')} />
-          <Button className={Classes.MINIMAL} icon="chat" text="Channels" onClick={() => handleNavClick('/channels')} />
-          <Button className={Classes.MINIMAL} icon="chart" text="Reports" onClick={() => handleNavClick('/reports')} />
+          <Button className={Classes.MINIMAL} icon="person" text={isTabletOrLarger ? 'Contacts' : ''} onClick={() => handleNavClick('/contacts')} />
+          <Button className={Classes.MINIMAL} icon="comment" text={isTabletOrLarger ? 'Campaigns' : ''} onClick={() => handleNavClick('/campaigns')} />
+          <Button className={Classes.MINIMAL} icon="chat" text={isTabletOrLarger ? 'Channels' : ''} onClick={() => handleNavClick('/channels')} />
+          <Button className={Classes.MINIMAL} icon="chart" text={isTabletOrLarger ? 'Reports' : ''} onClick={() => handleNavClick('/reports')} />
         </NavbarGroup>
         <Button className={Classes.MINIMAL} onClick={() => handleLogout()} icon="log-out" text="Logout" />
       </S.Container>

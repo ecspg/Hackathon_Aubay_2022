@@ -4,25 +4,24 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Button, Icon, InputGroup, Intent } from '@blueprintjs/core';
 
-import ContactService from '@services/ContactService';
+import ChannelService from '@services/ChannelService';
 import List from '@components/List';
 
 import * as S from './styles';
 
-function ListContacts() {
+function ListChannels() {
   const navigate = useNavigate();
-  const [contacts, setContacts] = useState();
+  const [channels, setChannels] = useState();
   const [filterValue, setFilterValue] = useState();
   const tableFields = [
-    { prop: 'firstName', header: 'First name' },
-    { prop: 'middleName', header: 'Middle name' },
-    { prop: 'surname', header: 'Surname' },
-    { prop: 'internalIdentification', header: 'Internal identification' },
+    { prop: 'type', header: 'Channel name' },
+    { prop: 'hostname', header: 'Hostname' },
+    { prop: 'key', header: 'Key' },
   ]
 
   useEffect(() => {
-    ContactService.getContacts().then(data => {
-      setContacts(data);
+    ChannelService.getChannels().then(data => {
+      setChannels(data);
     });
   }, []);
 
@@ -31,16 +30,16 @@ function ListContacts() {
   }
 
   function handleAddClick() {
-    navigate("/contacts/new");
+    navigate("/channels/new");
   }
 
   return (
     <S.Container>
-      <h1>Contacts</h1>
+      <h1>Channels</h1>
       <S.FilterButtonWrapper>
         <S.ButtonWrapper>
           <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
-            Add Contact
+            Add Channel
           </Button>
           <Button intent={Intent.SUCCESS}>
             <Icon icon="table" /> Add via CSV
@@ -50,13 +49,13 @@ function ListContacts() {
           large
           leftIcon="filter"
           onChange={(e) => handleFilterChange(e)}
-          placeholder="Filter contacts..."
+          placeholder="Filter channels..."
           value={filterValue}
         />
       </S.FilterButtonWrapper>
-      {contacts && <List tableInfo={contacts} tableFields={tableFields} />}
+      {channels && <List tableInfo={channels} tableFields={tableFields} />}
     </S.Container>
   )
 }
 
-export default ListContacts;
+export default ListChannels;
