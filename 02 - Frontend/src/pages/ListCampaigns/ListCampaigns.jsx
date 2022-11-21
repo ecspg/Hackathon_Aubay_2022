@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Icon, InputGroup, Intent } from '@blueprintjs/core';
 
 import CampaignService from '@services/CampaignService';
+import Header from '@components/Header/Header';
 import List from '@components/List';
 
 import * as S from './styles';
@@ -37,27 +38,30 @@ function ListCampaigns() {
   }
 
   return (
-    <S.Container>
-      <h1>Campaigns</h1>
-      <S.FilterButtonWrapper>
-        <S.ButtonWrapper>
-          <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
-            Add Campaign
-          </Button>
-          <Button intent={Intent.SUCCESS}>
-            <Icon icon="table" /> Import CSV
-          </Button>
-        </S.ButtonWrapper>
-        <InputGroup
-          large
-          leftIcon="filter"
-          onChange={(e) => handleFilterChange(e)}
-          placeholder="Filter campaign..."
-          value={filterValue}
-        />
-      </S.FilterButtonWrapper>
-      {campaign && <List tableInfo={campaign} tableFields={tableFields} />}
-    </S.Container>
+    <>
+      <Header />
+      <S.Container>
+        <h1>Campaigns</h1>
+        <S.FilterButtonWrapper>
+          <S.ButtonWrapper>
+            <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
+              Add Campaign
+            </Button>
+            <Button intent={Intent.SUCCESS}>
+              <Icon icon="table" /> Import CSV
+            </Button>
+          </S.ButtonWrapper>
+          <InputGroup
+            large
+            leftIcon="filter"
+            onChange={(e) => handleFilterChange(e)}
+            placeholder="Filter campaign..."
+            value={filterValue}
+          />
+        </S.FilterButtonWrapper>
+        {campaign && <List tableInfo={campaign} tableFields={tableFields} />}
+      </S.Container>
+    </>
   )
 }
 

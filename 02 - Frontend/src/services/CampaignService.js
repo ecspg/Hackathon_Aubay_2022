@@ -68,9 +68,11 @@ const CampaignService = {
           .post('https://api.emailjs.com/api/v1.0/email/send', templateParams)
           .then(
             (response) => {
+              // eslint-disable-next-line no-console
               console.log('SUCCESS!', response.status, response.text);
             },
             (error) => {
+              // eslint-disable-next-line no-console
               console.log('FAILED...', error);
             }
           );

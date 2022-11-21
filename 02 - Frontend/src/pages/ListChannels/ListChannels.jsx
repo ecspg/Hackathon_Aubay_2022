@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Icon, InputGroup, Intent } from '@blueprintjs/core';
 
 import ChannelService from '@services/ChannelService';
+import Header from '@components/Header/Header';
 import List from '@components/List';
 
 import * as S from './styles';
@@ -35,27 +36,30 @@ function ListChannels() {
   }
 
   return (
-    <S.Container>
-      <h1>Channels</h1>
-      <S.FilterButtonWrapper>
-        <S.ButtonWrapper>
-          <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
-            Add Channel
-          </Button>
-          <Button intent={Intent.SUCCESS}>
-            <Icon icon="table" /> Import CSV
-          </Button>
-        </S.ButtonWrapper>
-        <InputGroup
-          large
-          leftIcon="filter"
-          onChange={(e) => handleFilterChange(e)}
-          placeholder="Filter channels..."
-          value={filterValue}
-        />
-      </S.FilterButtonWrapper>
-      {channels && <List tableInfo={channels} tableFields={tableFields} />}
-    </S.Container>
+    <>
+      <Header />
+      <S.Container>
+        <h1>Channels</h1>
+        <S.FilterButtonWrapper>
+          <S.ButtonWrapper>
+            <Button intent={Intent.SUCCESS} onClick={() => handleAddClick()}>
+              Add Channel
+            </Button>
+            <Button intent={Intent.SUCCESS}>
+              <Icon icon="table" /> Import CSV
+            </Button>
+          </S.ButtonWrapper>
+          <InputGroup
+            large
+            leftIcon="filter"
+            onChange={(e) => handleFilterChange(e)}
+            placeholder="Filter channels..."
+            value={filterValue}
+          />
+        </S.FilterButtonWrapper>
+        {channels && <List tableInfo={channels} tableFields={tableFields} />}
+      </S.Container>
+    </>
   )
 }
 

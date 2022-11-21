@@ -7,6 +7,7 @@ import { MultiSelect2 } from "@blueprintjs/select";
 
 import CampaignService from '@services/CampaignService';
 import ContactService from '@services/ContactService';
+import Header from '@components/Header/Header';
 import TransferList from '@components/TransferList';
 
 import * as S from './styles';
@@ -101,97 +102,100 @@ function Campaign() {
   }
 
   return (
-    <S.Container>
-      <h1>New campaign</h1>
-      <form onSubmit={e => handleSubmit(e)}>
-          <S.FormWrapper>
-            <FormGroup
-              label="Name"
-              labelFor="name"
-            >
-              <InputGroup
-                id="name"
-                onChange={e=>handleOnChange(e.target)}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Title"
-              labelFor="title"
-            >
-              <InputGroup
-                id="title"
-                onChange={e=>handleOnChange(e.target)}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Description"
-              labelFor="description"
-            >
-              <TextArea
-                id="description"
-                growVertically
-                fill
-                large
-                intent={Intent.PRIMARY}
-                onChange={e=>handleOnChange(e.target)}
-                value={campaignInfo.description}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Scheduled Begin (yyyy-MM-dd)"
-              labelFor="scheduledBegin"
-            >
-              <InputGroup
-                id="scheduledBegin"
-                onChange={e=>handleOnChange(e.target)}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Scheduled End (yyyy-MM-dd)"
-              labelFor="scheduledEnd"
-            >
-              <InputGroup
-                id="scheduledEnd"
-                onChange={e=>handleOnChange(e.target)}
-              />
-            </FormGroup>
-            {/* <FormGroup
-              label="Status"
-              labelFor="status"
-            >
-              <InputGroup
-                id="status"
-                onChange={e=>handleOnChange(e.target)}
-              />
-            </FormGroup> */}
-            <FormGroup
-              label="Channels"
-              labelFor="channels"
-            >
-              <MultiSelect2
-                // eslint-disable-next-line react/jsx-no-bind
-                itemRenderer={renderChannels}
-                items={channels}
-                menuProps={{ "aria-label": "channels" }}
-                noResults={<MenuItem disabled text="No results." roleStructure="listoption" />}
-                onItemSelect={(e) => setSelectedChannel(e)}
-                popoverProps={{ matchTargetWidth: true, minimal: true }}
-                popoverRef={popoverRef}
-                tagRenderer={(channel) => channel.type}
-                tagInputProps={{
-                  onRemove: handleTagRemove,
-                  tagProps: { minimal: true },
-                }}
-                selectedItems={selectedChannels}
-              />
-            </FormGroup>
-          </S.FormWrapper>
-          <TransferList data={contacts} onTransfer={onTransfer} />
-          <S.ButtonWrapper>
-            <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
-          </S.ButtonWrapper>
-        </form>
-    </S.Container>
+    <>
+      <Header />
+      <S.Container>
+        <h1>New campaign</h1>
+        <form onSubmit={e => handleSubmit(e)}>
+            <S.FormWrapper>
+              <FormGroup
+                label="Name"
+                labelFor="name"
+              >
+                <InputGroup
+                  id="name"
+                  onChange={e=>handleOnChange(e.target)}
+                />
+              </FormGroup>
+              <FormGroup
+                label="Title"
+                labelFor="title"
+              >
+                <InputGroup
+                  id="title"
+                  onChange={e=>handleOnChange(e.target)}
+                />
+              </FormGroup>
+              <FormGroup
+                label="Description"
+                labelFor="description"
+              >
+                <TextArea
+                  id="description"
+                  growVertically
+                  fill
+                  large
+                  intent={Intent.PRIMARY}
+                  onChange={e=>handleOnChange(e.target)}
+                  value={campaignInfo.description}
+                />
+              </FormGroup>
+              <FormGroup
+                label="Scheduled Begin (yyyy-MM-dd)"
+                labelFor="scheduledBegin"
+              >
+                <InputGroup
+                  id="scheduledBegin"
+                  onChange={e=>handleOnChange(e.target)}
+                />
+              </FormGroup>
+              <FormGroup
+                label="Scheduled End (yyyy-MM-dd)"
+                labelFor="scheduledEnd"
+              >
+                <InputGroup
+                  id="scheduledEnd"
+                  onChange={e=>handleOnChange(e.target)}
+                />
+              </FormGroup>
+              {/* <FormGroup
+                label="Status"
+                labelFor="status"
+              >
+                <InputGroup
+                  id="status"
+                  onChange={e=>handleOnChange(e.target)}
+                />
+              </FormGroup> */}
+              <FormGroup
+                label="Channels"
+                labelFor="channels"
+              >
+                <MultiSelect2
+                  // eslint-disable-next-line react/jsx-no-bind
+                  itemRenderer={renderChannels}
+                  items={channels}
+                  menuProps={{ "aria-label": "channels" }}
+                  noResults={<MenuItem disabled text="No results." roleStructure="listoption" />}
+                  onItemSelect={(e) => setSelectedChannel(e)}
+                  popoverProps={{ matchTargetWidth: true, minimal: true }}
+                  popoverRef={popoverRef}
+                  tagRenderer={(channel) => channel.type}
+                  tagInputProps={{
+                    onRemove: handleTagRemove,
+                    tagProps: { minimal: true },
+                  }}
+                  selectedItems={selectedChannels}
+                />
+              </FormGroup>
+            </S.FormWrapper>
+            <TransferList data={contacts} onTransfer={onTransfer} />
+            <S.ButtonWrapper>
+              <Button type="submit" intent={Intent.SUCCESS}>Submit</Button>
+            </S.ButtonWrapper>
+          </form>
+      </S.Container>
+    </>
   )
 }
 
