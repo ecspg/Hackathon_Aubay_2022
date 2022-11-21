@@ -22,6 +22,7 @@ function Contact() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    contactInfo.id = Math.floor(Math.random() * 1000);
     ContactService.addContact(contactInfo).then(() => {
       navigate("/contacts");
     });

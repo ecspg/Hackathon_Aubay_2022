@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 const mock = [
   {
@@ -51,6 +51,30 @@ const CampaignService = {
     if (campaign) {
       campaign.push({ ...campaignInfo, status: 'Sent' });
       localStorage.setItem('campaign', JSON.stringify(campaign));
+
+      campaignInfo.contactIds.forEach((contact) => {
+        const templateParams = {
+          service_id: 'service_7f2rgqb',
+          template_id: 'template_lhfx1jp',
+          user_id: 'o9y4l8EZqZ52Oo3y1',
+          template_params: {
+            title: campaignInfo.title,
+            description: campaignInfo.description,
+            email: contact.email1,
+          },
+        };
+
+        axios
+          .post('https://api.emailjs.com/api/v1.0/email/send', templateParams)
+          .then(
+            (response) => {
+              console.log('SUCCESS!', response.status, response.text);
+            },
+            (error) => {
+              console.log('FAILED...', error);
+            }
+          );
+      });
     }
 
     // TODO: Post to back-end campaigns
