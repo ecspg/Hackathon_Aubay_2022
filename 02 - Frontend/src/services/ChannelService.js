@@ -26,16 +26,29 @@ const mock = [
 
 const ChannelService = {
   getChannels() {
+    const channels = JSON.parse(localStorage.getItem('channels'));
+
+    if (!channels) {
+      localStorage.setItem('channels', JSON.stringify(mock));
+    }
+
     // TODO: Get from back-end channels
     return new Promise((resolve) => {
-      resolve(mock);
+      resolve(channels || mock);
     });
     /* return axios.get('http://bit.ly/2mTM3nY'); */
   },
   addChannel(channelInfo) {
+    const channels = JSON.parse(localStorage.getItem('channels'));
+
+    if (channels) {
+      channels.push(channelInfo);
+      localStorage.setItem('channels', JSON.stringify(channels));
+    }
+
     // TODO: Post to back-end channels
     return new Promise((resolve) => {
-      resolve(channelInfo);
+      resolve(channels);
     });
     /* return axios.post('http://bit.ly/2mTM3nY', channelInfo); */
   },

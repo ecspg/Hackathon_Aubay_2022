@@ -43,7 +43,6 @@ function List({ tableInfo, tableFields }) {
     const cellInfo = tableInfo[i][tableField?.prop];
     
     if (cellInfo instanceof Date) {
-      // eslint-disable-next-line prefer-template
       return <Cell>{ `${ cellInfo.getDate().toString().padStart(2, '0')}/${ (cellInfo.getMonth() + 1).toString().padStart(2, '0')}/${ cellInfo.getFullYear() }` }</Cell>;
     }
 
