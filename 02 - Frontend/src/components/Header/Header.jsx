@@ -1,5 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Button, Classes, NavbarDivider, NavbarGroup, NavbarHeading } from '@blueprintjs/core';
 
 import logo from '@assets/logo.png';
@@ -10,6 +11,7 @@ import * as S from './styles';
 
 function Header() {
   const global = useContext(GlobalContext);
+  const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isTabletOrLarger, setIsTabletOrLarger] = useState(false);
 
@@ -19,12 +21,12 @@ function Header() {
   }, [])
 
   function handleNavClick(navUrl) {
-    window.location = navUrl;
+    navigate(navUrl);
   }
 
   function handleLogout() {
     global.setUserInfo(null);
-    window.location = '/';
+    navigate("/");
   }
 
   return (!isLoginPage || global.userInfo) && (
