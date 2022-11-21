@@ -39,11 +39,22 @@ function List({ tableInfo, tableFields }) {
     );
   }
 
+  function renderCell(i, tableField) {
+    const cellInfo = tableInfo[i][tableField?.prop];
+    
+    if (cellInfo instanceof Date) {
+      // eslint-disable-next-line prefer-template
+      return <Cell>{ `${ cellInfo.getDate().toString().padStart(2, '0')}/${ (cellInfo.getMonth() + 1).toString().padStart(2, '0')}/${ cellInfo.getFullYear() }` }</Cell>;
+    }
+
+    return <Cell>{ cellInfo }</Cell>;
+  }
+
   return tableInfo && (
     <HotkeysProvider>
       <Table2 columnWidths={getColumnWidths()} numRows={tableInfo.length} enableColumnResizing enableRowHeader={false}>
         {tableFields?.length && tableFields.map(tableField => (
-          <Column key={tableField?.header} cellRenderer={(i) => <Cell>{ tableInfo[i][tableField?.prop] }</Cell>} columnHeaderCellRenderer={() => <ColumnHeaderCell2 name={tableField?.header} index={0} nameRenderer={() => renderName(tableField?.header)} />} />
+          <Column key={tableField?.header} cellRenderer={(i) => renderCell(i, tableField)} columnHeaderCellRenderer={() => <ColumnHeaderCell2 name={tableField?.header} index={0} nameRenderer={() => renderName(tableField?.header)} />} />
         ))}
       </Table2>
     </HotkeysProvider>

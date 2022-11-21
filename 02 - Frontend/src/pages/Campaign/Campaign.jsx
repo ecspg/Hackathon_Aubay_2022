@@ -90,8 +90,8 @@ function Campaign() {
     const newCampaign = {};
 
     Object.assign(newCampaign, campaignInfo);
-    newCampaign.scheduledBegin = new Date(newCampaign.scheduledBegin);
-    newCampaign.scheduledEnd = new Date(newCampaign.scheduledEnd);
+    newCampaign.scheduledBegin = newCampaign.scheduledBegin ? new Date(newCampaign.scheduledBegin) : new Date();
+    newCampaign.scheduledEnd = newCampaign.scheduledEnd ? new Date(newCampaign.scheduledEnd) : new Date();
     newCampaign.channelIds = selectedChannels.map(selectedChannel => selectedChannel.id);
     newCampaign.contactIds = selectedContacts;
 
