@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useState } from 'react';
-import { Button, Elevation, FormGroup, InputGroup, Intent } from '@blueprintjs/core';
+import { Button, Elevation, FormGroup, InputGroup, Intent, Toaster } from '@blueprintjs/core';
 import { useNavigate } from "react-router-dom";
 
 import LoginService from '@services/LoginService';
@@ -15,6 +15,7 @@ function Login() {
   const global = useContext(GlobalContext);
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({login: '', password: ''});
+  const [toaster, setToaster] = useState(null);
 
   function handleOnChange({ id, value }) {
     const info = {};
@@ -28,8 +29,12 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     LoginService.authenticate(loginInfo).then(res => {
-      global.setUserInfo(res);
-      navigate("/contacts");
+      if (res.res) {
+        global.setUserInfo(res.loginInfo);
+        navigate("/contacts");
+      } else {
+        toaster.show({ icon: 'warning-sign', intent: Intent.DANGER, message: 'Login and/or password are wrong!', timeout: 2000 });
+      }
     });
   }
 
@@ -62,6 +67,7 @@ function Login() {
           <Button type="submit" intent={Intent.SUCCESS}>LOGIN</Button>
         </S.Form>
       </S.LoginCard>
+      <Toaster usePortal canEscapeKeyClear ref={ref => setToaster(ref)} />
     </S.Container>
   )
 }

@@ -2,16 +2,25 @@
 
 const mock = [
   {
+    type: 'Email',
+    hostname: '',
+    key: '',
+    secret: '',
+    id: 1,
+  },
+  {
     type: 'WhatsApp',
     hostname: '',
     key: '',
     secret: '',
+    id: 2,
   },
   {
     type: 'Telegram',
     hostname: '',
     key: '',
     secret: '',
+    id: 3,
   },
 ];
 
