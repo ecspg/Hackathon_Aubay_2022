@@ -27,16 +27,29 @@ const mock = [
 
 const ContactService = {
   getContacts() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+
+    if (!contacts) {
+      localStorage.setItem('contacts', JSON.stringify(mock));
+    }
+
     // TODO: Get from back-end contacts
     return new Promise((resolve) => {
-      resolve(mock);
+      resolve(contacts || mock);
     });
     /* return axios.get('http://bit.ly/2mTM3nY'); */
   },
   addContact(contactInfo) {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+
+    if (contacts) {
+      contacts.push(contactInfo);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+
     // TODO: Post to back-end contacts
     return new Promise((resolve) => {
-      resolve(contactInfo);
+      resolve(contacts);
     });
     /* return axios.post('http://bit.ly/2mTM3nY', contactInfo); */
   },

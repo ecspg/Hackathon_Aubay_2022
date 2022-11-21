@@ -16,13 +16,13 @@ function TransferList({ data, onTransfer }) {
   }, [data]);
 
   useEffect(() => {
-    const transferedItems = [];
+    /* const transferedItems = [];
 
     selectedItems?.forEach(selectedItem => {
       transferedItems.push(selectedItem.id);
-    });
+    }); */
 
-    onTransfer(transferedItems);
+    onTransfer(selectedItems);
   }, [selectedItems]);
 
   function handleCheck(checkItems, setCheckItems, id) {
